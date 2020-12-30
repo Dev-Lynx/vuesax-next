@@ -1,8 +1,7 @@
 import { VNode, h } from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsTableTd extends VsComponent {
   @Prop({ type: Boolean }) checkbox: boolean
   @Prop({ type: Boolean }) edit: boolean

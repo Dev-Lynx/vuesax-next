@@ -1,9 +1,8 @@
 import { VNode, h } from 'vue'
 import { Vue } from "vue-class-component"
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsTableTr extends VsComponent {
   @Prop({}) colspan: number
   hidden: boolean = true

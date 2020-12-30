@@ -1,8 +1,8 @@
 import { Options, Vue } from "vue-class-component";
 import { VNode, h } from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator'
 
-@Component
+
 export default class VsCol extends Vue {
   // tslint:disable-next-line:member-access
   static install: (vue: any) => any

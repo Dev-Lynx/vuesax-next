@@ -1,9 +1,8 @@
 import { VNode, h } from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import VsIconsCheck from '../../../icons/check'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsCheckbox extends VsComponent {
   // tslint:disable-next-line:variable-name
   _uid: any

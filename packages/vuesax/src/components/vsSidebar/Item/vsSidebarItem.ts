@@ -1,9 +1,8 @@
 import { VNode, h } from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import VsIconsArrow from '../../../icons/arrow'
 
-@Component
 export default class VsSidebarItem extends VsComponent {
 
   @Prop({}) to: string

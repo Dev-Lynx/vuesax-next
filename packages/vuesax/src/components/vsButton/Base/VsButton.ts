@@ -1,9 +1,8 @@
 import { VNode, h } from 'vue';
-import { Component, Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import ripple, { rippleCut, rippleReverse } from '../../../util/ripple/index'
 
-@Component
 export default class VsButton extends VsComponent {
   [x: string]: any
   public Class: string = ''

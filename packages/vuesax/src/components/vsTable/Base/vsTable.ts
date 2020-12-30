@@ -1,9 +1,8 @@
 import * as _ from 'lodash'
 import { VNode, h } from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsTable extends VsComponent {
   colspan: number = 0
   @Prop({}) value: any

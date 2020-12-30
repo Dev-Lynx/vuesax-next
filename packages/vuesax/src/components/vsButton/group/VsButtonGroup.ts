@@ -1,8 +1,6 @@
 import { VNode, h } from 'vue';
-import { Component } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsButton extends VsComponent {
   public Class: string = ''
 

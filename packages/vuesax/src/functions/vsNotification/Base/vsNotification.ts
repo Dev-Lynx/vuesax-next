@@ -1,10 +1,10 @@
 import { h, VNode } from "vue";
 import { Vue } from "vue-class-component";
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import VsIconsClose from '../../../icons/close'
 import { setColor } from '../../../util/index'
 
-@Component
+
 export default class VsNotification extends Vue {
 
   isVisible: boolean = false

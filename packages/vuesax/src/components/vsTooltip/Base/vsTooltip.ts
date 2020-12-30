@@ -1,9 +1,8 @@
 import { VNode, h } from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import { insertBody, setCordsPosition } from '../../../util/index'
 
-@Component
 export default class VsTooltip extends VsComponent {
 
   activeTooltip: boolean = false

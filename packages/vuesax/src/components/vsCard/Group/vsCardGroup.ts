@@ -1,9 +1,7 @@
 import { VNode, h } from 'vue'
-import { Component } from 'vue-property-decorator'
 import VsIconsArrow from '../../../icons/arrow'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsCardGroup extends VsComponent {
   public render(): VNode {
     const arrowPrev = h('button', {

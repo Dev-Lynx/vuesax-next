@@ -1,8 +1,7 @@
 import { VNode, h } from 'vue'
-import { Component, Watch } from 'vue-property-decorator'
+import { Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsOptionGroup extends VsComponent {
   optionGroup: boolean = true
 

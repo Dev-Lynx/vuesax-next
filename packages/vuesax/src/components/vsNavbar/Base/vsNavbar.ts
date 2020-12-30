@@ -1,8 +1,7 @@
 import { VNode, h } from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsNavbar extends VsComponent {
 
   @Prop({ default: false, type: Boolean }) fixed: boolean

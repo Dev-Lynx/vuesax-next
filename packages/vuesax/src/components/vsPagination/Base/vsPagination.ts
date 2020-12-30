@@ -1,9 +1,8 @@
 import { VNode, h } from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import VsIconsArrow from '../../../icons/arrow'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsPagination extends VsComponent {
   val: number = 0
 

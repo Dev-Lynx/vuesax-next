@@ -1,8 +1,9 @@
 import { VNode, h, createVNode, render } from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import expand from './vsTableExpand'
-@Component
+
+
 export default class VsTableTr extends VsComponent {
   @Prop({}) data: any
   @Prop({ type: Boolean, default: false }) isSelected: boolean

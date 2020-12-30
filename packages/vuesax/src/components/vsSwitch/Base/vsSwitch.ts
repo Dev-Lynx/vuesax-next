@@ -1,8 +1,7 @@
 import { VNode, h } from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsSwitch extends VsComponent {
 
   @Prop({ default: '' }) value: any
