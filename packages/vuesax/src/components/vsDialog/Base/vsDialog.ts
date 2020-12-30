@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsIconsClose from '../../../icons/close'
 import VsComponent from '../../../mixins/component'
@@ -76,11 +76,11 @@ export default class VsDialog extends VsComponent {
     }
   }
 
-  public render(h?: any): VNode {
+  public render(): VNode {
     const header = h('header', {
       staticClass: 'vs-dialog__header'
     }, [
-      this.$slots.header
+      this.$slots.header()
     ])
 
     const content = h('div', {
@@ -89,13 +89,13 @@ export default class VsDialog extends VsComponent {
         notFooter: !this.$slots.footer
       }
     }, [
-      this.$slots.default
+      this.$slots.default()
     ])
 
     const footer = h('footer', {
       staticClass: 'vs-dialog__footer'
     }, [
-      this.$slots.footer
+      this.$slots.footer()
     ])
 
     const close = h('button', {
@@ -140,9 +140,9 @@ export default class VsDialog extends VsComponent {
     }, [
       this.loading && loading,
       !this.notClose && close,
-      this.$slots.header && header,
+      this.$slots.header() && header,
       content,
-      this.$slots.footer && footer
+      this.$slots.footer() && footer
     ])
 
     const dialogContent = h('div', {

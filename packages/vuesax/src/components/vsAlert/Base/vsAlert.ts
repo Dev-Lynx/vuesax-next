@@ -1,4 +1,4 @@
-import { VNode } from "vue"
+import { VNode, h } from "vue"
 import { Prop, Watch } from "vue-property-decorator"
 import VsIconsClose from '../../../icons/close'
 import VsIconsPlus from '../../../icons/plus'
@@ -120,19 +120,19 @@ export default class VsAlert extends VsComponent {
     }
   }
 
-  render(h?: any): VNode {
+  render(): VNode {
     const icon = h('div', {
       staticClass: 'vs-alert__icon',
       ref: 'icon'
     }, [
-      this.$slots.icon
+      this.$slots.icon()
     ])
 
     const contentText = h('div', {
       staticClass: 'vs-alert__content__text',
       ref: 'text'
     }, [
-      this.$slots.default,
+      this.$slots.default(),
       ...this.getPages
     ])
 
@@ -158,7 +158,7 @@ export default class VsAlert extends VsComponent {
         click: this.handleClickHidden
       }
     }, [
-      this.$slots.title,
+      this.$slots.title(),
       !this.closable && typeof this.hiddenContent === 'boolean' && h(VsIconsPlus, {
         props: {
           less: !this.hiddenContent
@@ -201,7 +201,7 @@ export default class VsAlert extends VsComponent {
     const footer = h('div', {
       staticClass: 'vs-alert__footer',
     }, [
-      this.$slots.footer
+      this.$slots.footer()
     ])
 
     const progress = h('div', {
