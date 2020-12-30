@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import { insertBody, setCordsPosition } from '../../../util/index'
@@ -135,7 +135,7 @@ export default class VsTooltip extends VsComponent {
     window.removeEventListener('mousedown', this.handleMouseDownNotHover)
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const loading = h('div', {
       staticClass: 'vs-tooltip__loading',
     })
@@ -180,7 +180,7 @@ export default class VsTooltip extends VsComponent {
         }
       }
     }, [
-      this.$slots.tooltip,
+      this.$slots.tooltip(),
       this.loading && loading
     ])
 
@@ -215,7 +215,7 @@ export default class VsTooltip extends VsComponent {
       }, [
         this.activeTooltip && tooltip,
       ]),
-      this.$slots.default
+      this.$slots.default()
     ])
   }
 }

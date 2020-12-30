@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import { setColor } from '../../../util/index'
@@ -86,29 +86,29 @@ export default class VsSidebar extends VsComponent {
     }
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const logo = h('div', {
       staticClass: 'vs-sidebar__logo'
     }, [
-      this.$slots.logo
+      this.$slots.logo()
     ])
 
     const header = h('div', {
       staticClass: 'vs-sidebar__header'
     }, [
-      this.$slots.header
+      this.$slots.header()
     ])
 
     const footer = h('div', {
       staticClass: 'vs-sidebar__footer'
     }, [
-      this.$slots.footer
+      this.$slots.footer()
     ])
 
     const sidebar = h('div', {
       staticClass: 'vs-sidebar',
     }, [
-      this.$slots.default
+      this.$slots.default()
     ])
 
     return h('div', {
@@ -148,10 +148,10 @@ export default class VsSidebar extends VsComponent {
         }
       }
     }, [
-      this.$slots.logo && logo,
-      this.$slots.header && header,
+      this.$slots.logo() && logo,
+      this.$slots.header() && header,
       sidebar,
-      this.$slots.footer && footer
+      this.$slots.footer() && footer
     ])
   }
 }

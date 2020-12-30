@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -15,7 +15,8 @@ export default class VsOptionGroup extends VsComponent {
   }
   get labels() {
     let labels: string = ''
-    this.$slots.default.forEach((item) => {
+    // TODO: Look into OptionGroup labeling once clicked
+    this.$slots.default().forEach((item: any) => {
       if (item.tag) {
         labels += (item.componentInstance as any).label
       }
@@ -37,7 +38,7 @@ export default class VsOptionGroup extends VsComponent {
     this.textFilter = val
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     return h('div', {
       staticClass: 'vs-select__option-group',
       class: [
@@ -47,8 +48,8 @@ export default class VsOptionGroup extends VsComponent {
       ]
     },
       [
-        h('h5', {}, this.$slots.title),
-        this.$slots.default
+        h('h5', {}, this.$slots.title()),
+        this.$slots.default()
       ]
     )
   }

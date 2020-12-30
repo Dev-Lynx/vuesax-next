@@ -1,10 +1,9 @@
-import { VNode } from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { VNode } from "vue"
+import { Prop, Watch } from "vue-property-decorator"
 import VsIconsClose from '../../../icons/close'
 import VsIconsPlus from '../../../icons/plus'
 import VsComponent from '../../../mixins/component'
 
-@Component
 export default class VsAlert extends VsComponent {
   @Prop({ type: Boolean, default: false }) solid!: boolean
 
@@ -121,7 +120,7 @@ export default class VsAlert extends VsComponent {
     }
   }
 
-  render(h: any): VNode {
+  render(h?: any): VNode {
     const icon = h('div', {
       staticClass: 'vs-alert__icon',
       ref: 'icon'

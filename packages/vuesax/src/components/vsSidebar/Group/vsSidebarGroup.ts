@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -55,7 +55,7 @@ export default class VsSidebarGroup extends VsComponent {
     }
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const header = h('div', {
       staticClass: 'vs-sidebar__group__header',
       on: {
@@ -64,7 +64,7 @@ export default class VsSidebarGroup extends VsComponent {
         }
       }
     }, [
-      this.$slots.header
+      this.$slots.header()
     ])
 
     const content = h('div', {
@@ -77,7 +77,7 @@ export default class VsSidebarGroup extends VsComponent {
         }
       ]
     }, [
-      this.$slots.default
+      this.$slots.default()
     ])
 
     const transition = h('transition', {

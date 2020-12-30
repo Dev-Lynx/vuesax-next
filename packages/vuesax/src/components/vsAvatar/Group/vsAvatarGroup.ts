@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue';
 import { Component, Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -12,14 +12,14 @@ export default class VsAvatarGroup extends VsComponent {
 
   vsAvatarGroup: boolean = true
 
-  public render(h: any): VNode {
-    return h('div', {
+  public render(): VNode {
+    return h("div", {
       staticClass: 'vs-avatar__group',
       class: {
         float: this.float
       }
-    }, [
-      this.$slots.default
-    ])
+    }, {
+      [this.$slots.default.toString()]: this.$slots.default
+    })
   }
 }

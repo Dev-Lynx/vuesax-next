@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue';
 import { Component } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -8,7 +8,7 @@ export default class VsButton extends VsComponent {
 
   public prototype: any
 
-  public render(h: any): VNode {
+  public render(): VNode {
 
     const btnGroup = h('div', {
       staticClass: 'vs-button-group'

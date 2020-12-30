@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -54,7 +54,7 @@ export default class VsNavbarItem extends VsComponent {
     }, 150)
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     return h('button', {
       staticClass: 'vs-navbar__item',
       class: {
@@ -68,6 +68,6 @@ export default class VsNavbarItem extends VsComponent {
           this.handleActive()
         }
       }
-    }, this.$slots.default)
+    }, this.$slots.default())
   }
 }

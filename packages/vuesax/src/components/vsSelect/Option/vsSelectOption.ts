@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Inject, Prop, Watch  } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import '../../vsCheckbox/Base/style.sass'
@@ -64,12 +64,12 @@ export default class VsSelectOption extends VsComponent {
     this.getParent().setHover()
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const checkbox = h(vsCheckbox, {
       props: {
         checkedForce: this.isActive,
       },
-    }, [this.$slots.default])
+    }, [this.$slots.default()])
 
     return h('button', {
       attrs: {
@@ -83,7 +83,9 @@ export default class VsSelectOption extends VsComponent {
         hiddenOption: this.hiddenOption
       }],
       on: {
-        ...this.$listeners,
+        // https://v3.vuejs.org/guide/migration/listeners-removed.html#overview
+        // TODO: Filter out listeners
+        ...this.$attrs,
         mousedown: () => {
           console.log(this.value);
           (this.$parent as any).clickOption(this.value, this.label)
@@ -96,7 +98,7 @@ export default class VsSelectOption extends VsComponent {
       }
     }, [
       this.isMultiple && checkbox,
-      !this.isMultiple && this.$slots.default,
+      !this.isMultiple && this.$slots.default(),
     ])
   }
 }

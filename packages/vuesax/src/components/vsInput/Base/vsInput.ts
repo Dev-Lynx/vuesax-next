@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -49,23 +49,23 @@ export default class VsInput extends VsComponent {
   }
 
   getMessage(type: string) {
-    return this.$createElement('transition', {
+    return h('transition', {
       on: {
         beforeEnter: this.beforeEnter,
         enter: this.enter,
         leave: this.leave
       },
     }, [
-      !!this.$slots[`message-${type}`] && this.$createElement('div', {
+      !!this.$slots[`message-${type}`] && h('div', {
         staticClass: 'vs-input__message',
         class: [`vs-input__message--${type}`]
       }, [
-        this.$slots[`message-${type}`]
+        this.$slots[`message-${type}`]()
       ])
     ])
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
 
     const input = h('input', {
       staticClass: 'vs-input',
@@ -77,7 +77,9 @@ export default class VsInput extends VsComponent {
         { ['vs-input--has-icon--after']: !!this.iconAfter }
       ],
       on: {
-        ...this.$listeners,
+        // https://v3.vuejs.org/guide/migration/listeners-removed.html#overview
+        // TODO: Filter out listeners
+        ...this.$attrs,
         input: (evt: any) => {
           this.$emit('input', evt.target.value)
         }
@@ -113,14 +115,15 @@ export default class VsInput extends VsComponent {
         { 'vs-input__label--hidden': this.value !== '' },
       ],
     }, [
-      this.$attrs.placeholder
+      // TODO: Test this method
+      this.$attrs.placeholder as any
     ])
 
     const icon = h('span', {
       staticClass: 'vs-input__icon',
       class: [
         { 'vs-input__icon--after': this.iconAfter },
-        { 'vs-input__icon--click': !!this.$listeners['click-icon'] }
+        { 'vs-input__icon--click': !!this.$attrs['click-icon'] }
       ],
       on: {
         click: (evt: any) => {
@@ -128,7 +131,7 @@ export default class VsInput extends VsComponent {
         }
       },
     }, [
-      this.$slots.icon
+      this.$slots.icon()
     ])
 
     const messageSuccess = this.getMessage('success')

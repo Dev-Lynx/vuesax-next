@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsIconsArrow from '../../../icons/arrow'
 import VsComponent from '../../../mixins/component'
@@ -89,7 +89,6 @@ export default class VsPagination extends VsComponent {
   }
 
   renderDotted(text: string = '...') {
-    const h = this.$createElement
     const dotted = h('div', {
       staticClass: 'vs-pagination__dotted',
       class: {
@@ -131,7 +130,6 @@ export default class VsPagination extends VsComponent {
   }
 
   renderButton(NumberPage: number = 1) {
-    const h = this.$createElement
     const button = h('button', {
       ref: `btn${NumberPage}`,
       staticClass: 'vs-pagination__button',
@@ -225,7 +223,7 @@ export default class VsPagination extends VsComponent {
     this.handleValue(this.value, (this.val += 1))
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const active = h('div', {
       staticClass: 'vs-pagination__active',
       style: {
@@ -262,7 +260,7 @@ export default class VsPagination extends VsComponent {
         }
       }
     }, [
-      this.$slots.arrowPrev ? this.$slots.arrowPrev : h(VsIconsArrow)
+      this.$slots.arrowPrev ? this.$slots.arrowPrev() : h(VsIconsArrow)
     ])
 
     const next = h('button', {
@@ -284,13 +282,13 @@ export default class VsPagination extends VsComponent {
         }
       }
     }, [
-      this.$slots.arrowNext ? this.$slots.arrowNext : h(VsIconsArrow)
+      this.$slots.arrowNext ? this.$slots.arrowNext() : h(VsIconsArrow)
     ])
 
     const slot = h('div', {
       staticClass: 'vs-pagination__slot',
     }, [
-      this.$slots.default
+      this.$slots.default()
     ])
 
     const progress = h('div', {

@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import { VNode } from 'vue'
+import { Options, Vue } from "vue-class-component";
+import { VNode, h } from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
@@ -17,7 +17,7 @@ export default class VsRow extends Vue {
 
   @Prop({ type: String, default: 'row' }) public direction!: string
 
-  public render(h: any): VNode {
+  public render(): VNode {
 
     const vsRow = h('div', {
       staticClass: 'vs-row',
@@ -26,7 +26,7 @@ export default class VsRow extends Vue {
         alignItems: this.align,
         flexDirection: this.direction
       },
-    }, this.$slots.default )
+    }, this.$slots.default() )
 
     return vsRow
   }

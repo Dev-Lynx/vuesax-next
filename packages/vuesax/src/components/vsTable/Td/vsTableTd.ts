@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -6,7 +6,7 @@ import VsComponent from '../../../mixins/component'
 export default class VsTableTd extends VsComponent {
   @Prop({ type: Boolean }) checkbox: boolean
   @Prop({ type: Boolean }) edit: boolean
-  public render(h: any): VNode {
+  public render(): VNode {
     return h('td', {
       staticClass: 'vs-table__td',
       on: {
@@ -18,6 +18,6 @@ export default class VsTableTd extends VsComponent {
         isCheckbox: this.checkbox,
         isEdit: this.edit
       }
-    }, this.$slots.default)
+    }, this.$slots.default())
   }
 }

@@ -14,9 +14,12 @@
   "devDependencies": {
     "lerna": "^3.19.0",
     "shelljs": "^0.8.3",
-    "vue": "^2.6.11"
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0",
+    "vue-class-component": "^8.0.0-0"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.150"
+    "@types/lodash": "^4.14.150",
+    "vue-property-decorator": "^9.1.2"
   }
 }

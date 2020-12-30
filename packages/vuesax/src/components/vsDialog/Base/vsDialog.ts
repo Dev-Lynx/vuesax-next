@@ -76,7 +76,7 @@ export default class VsDialog extends VsComponent {
     }
   }
 
-  public render(h: any): VNode {
+  public render(h?: any): VNode {
     const header = h('header', {
       staticClass: 'vs-dialog__header'
     }, [

@@ -1,8 +1,8 @@
-import Vue, { VNode } from 'vue'
-import { Component, Watch } from 'vue-property-decorator'
+import { VNode, h } from "vue";
+import { Vue } from "vue-class-component";
+import { Component, Prop, Watch } from 'vue-property-decorator'
 import { setColor, setVar } from '../../../util/index'
 
-@Component
 export default class VsLoading extends Vue {
   text: string | null = null
 
@@ -24,6 +24,35 @@ export default class VsLoading extends Vue {
 
   isVisible: boolean = false
 
+  @Prop({ type: Function, default: () => {} }) $destroy: () => void;
+
+  public close() {
+    this.isVisible = false
+    document.body.style.overflowY = 'auto'
+    setTimeout(() => {
+      this.$destroy()
+      this.$el.parentNode.removeChild(this.$el);
+    }, 250)
+  }
+
+  public changePercent(val: string) {
+    if (val) {
+      this.percent = val;
+    }
+  }
+
+  public changeProgress(val: string) {
+    if (val) {
+      this.progress = val;
+    }
+  }
+
+  public changeText(val: string) {
+    if (val) {
+      this.text = val;
+    }
+  }
+
   @Watch('isVisible')
   handleIsVisible() {
     this.$nextTick(() => {
@@ -35,7 +64,7 @@ export default class VsLoading extends Vue {
     })
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const animation = h('div', {
       class: ['vs-loading__load__animation'],
     }, [

@@ -1,5 +1,5 @@
 import * as _ from 'lodash'
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -39,24 +39,24 @@ export default class VsTable extends VsComponent {
     this.$emit('input', newVal)
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const footer = h('footer', {
       staticClass: 'vs-table__footer'
     }, [
-      this.$slots.footer
+      this.$slots.footer()
     ])
 
     const header = h('header', {
       staticClass: 'vs-table__header'
     }, [
-      this.$slots.header
+      this.$slots.header()
     ])
 
     const thead = h('thead', {
       ref: 'thead',
       staticClass: 'vs-table__thead'
     }, [
-      this.$slots.thead
+      this.$slots.thead()
     ])
 
     const notFound = h('tbody', {
@@ -68,7 +68,7 @@ export default class VsTable extends VsComponent {
             colspan: this.colspan
           }
         }, [
-           this.$slots.notFound || 'No matching records found'
+           this.$slots.notFound() || 'No matching records found'
         ])
       ])
     ])
@@ -76,7 +76,7 @@ export default class VsTable extends VsComponent {
     const tbody = h('tbody', {
       staticClass: 'vs-table__tbody'
     }, [
-      this.$slots.tbody,
+      this.$slots.tbody(),
     ])
 
     const table = h('div', {

@@ -1,6 +1,6 @@
-import Vue from 'vue'
 import './style.sass'
-import component from './VsNotification'
+import mountVue from "../../../util/mountVueComponent";
+import VsNotification from './VsNotification';
 
 interface NotificationParams {
   title?: string
@@ -26,60 +26,38 @@ interface NotificationParams {
   classNotification?: string
 }
 
-const notificationConstructor = Vue.extend(component)
-
-// tslint:disable-next-line:only-arrow-functions
-notificationConstructor.prototype.close = function() {
-  this.isVisible = false
-}
-
-notificationConstructor.prototype.setLoading = function(val: boolean) {
-  this.loading = val
-}
-
-notificationConstructor.prototype.changeProgress = function(val: number) {
-  if (val) {
-    this.progress = val
-  }
-}
-
-notificationConstructor.prototype.toggleClass = function(val: number) {
-  if (val) {
-    this.classNotification = val
-    this.$el.closest('.vs-notification-parent').classList.toggle(val)
-  }
-}
 
 const notification = (params: NotificationParams = {}) => {
-  const instance = new notificationConstructor()
+  const instance = new VsNotification();
 
-  instance.$data.title = params.title
-  instance.$data.text = params.text
-  instance.$data.color = params.color
-  instance.$data.colorName = params.color
-  instance.$data.border = params.border
-  instance.$data.icon = params.icon
-  instance.$data.onClick = params.onClick
-  instance.$data.onClickClose = params.onClickClose
-  instance.$data.flat = params.flat
-  instance.$data.onDestroy = params.onDestroy
-  instance.$data.sticky = params.sticky
-  instance.$data.square = params.square
-  instance.$data.width = params.width
-  instance.$data.loading = params.loading
-  instance.$data.notPadding = params.notPadding
-  instance.$data.clickClose = params.clickClose
-  instance.$data.classNotification = params.classNotification
+  // instance.$data.title = params.title
+  // instance.$data.text = params.text
+  // instance.$data.color = params.color
+  // instance.$data.colorName = params.color
+  // instance.$data.border = params.border
+  // instance.$data.icon = params.icon
+  // instance.$data.onClick = params.onClick
+  // instance.$data.onClickClose = params.onClickClose
+  // instance.$data.flat = params.flat
+  // instance.$data.onDestroy = params.onDestroy
+  // instance.$data.sticky = params.sticky
+  // instance.$data.square = params.square
+  // instance.$data.width = params.width
+  // instance.$data.loading = params.loading
+  // instance.$data.notPadding = params.notPadding
+  // instance.$data.clickClose = params.clickClose
+  // instance.$data.classNotification = params.classNotification
+
   if (params.duration !== 'none') {
-    instance.$data.duration = params.duration || 4000
+    instance.duration = Number(params.duration) || 4000
   }
   if (params.progress == 'auto' && params.duration !== 'none') {
-    instance.$data.progressAuto = true
+    instance.progressAuto = true
   } else {
-    instance.$data.progress = params.progress
+    instance.progress = params.progress
   }
   if (typeof params.buttonClose == 'boolean') {
-    instance.$data.buttonClose = params.buttonClose
+    instance.buttonClose = params.buttonClose
   }
 
   if (params.width == '100%' || window.innerWidth < 600) {
@@ -106,13 +84,19 @@ const notification = (params: NotificationParams = {}) => {
     parent.classList.add(params.classNotification)
   }
 
-  parent.appendChild(instance.$mount().$el)
+  // parent.appendChild(instance.$mount().$el)
+  // document.body.appendChild(parent)
 
-  document.body.appendChild(parent)
+  mountVue(instance, {
+    props: {
+      ...params
+    }, element: parent
+  });
 
-  Vue.nextTick(() => {
-    instance.$data.isVisible = true
-    instance.$data.content = params.content
+  instance.$nextTick(() => {
+    instance.isVisible = false;
+    instance.isVisible = true
+    instance.content = params.content
   })
 
   if (params.duration !== 'none') {

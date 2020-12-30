@@ -1,4 +1,4 @@
-import { VNode, } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import VsIconsArrow from '../../../icons/arrow'
@@ -29,23 +29,23 @@ export default class VsSidebarItem extends VsComponent {
     }
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const icon = h('div', {
       staticClass: 'vs-sidebar__item__icon'
     }, [
-      this.$slots.icon
+      this.$slots.icon()
     ])
 
     const textTooltip = h('div', {
       staticClass: 'vs-sidebar__item__text-tooltip'
     }, [
-      this.$slots.default
+      this.$slots.default()
     ])
 
     const text = h('div', {
       staticClass: 'vs-sidebar__item__text'
     }, [
-      this.$slots.default
+      this.$slots.default()
     ])
 
     const iconArrow = h(VsIconsArrow)
@@ -53,7 +53,7 @@ export default class VsSidebarItem extends VsComponent {
     const arrow = h('div', {
       staticClass: 'vs-sidebar__item__arrow'
     }, [
-      this.$slots.arrow || iconArrow
+      this.$slots.arrow ? this.$slots.arrow() : iconArrow
     ])
 
     return h('button', {
@@ -71,10 +71,10 @@ export default class VsSidebarItem extends VsComponent {
         }
       }
     }, [
-      this.$slots.icon && icon,
+      this.$slots.icon() && icon,
       text,
       textTooltip,
-      this.$slots.arrow || this.arrow && arrow
+      this.$slots.arrow() || this.arrow && arrow
     ])
   }
 }

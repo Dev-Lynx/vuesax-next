@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue';
 import { Component, Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import ripple, { rippleCut, rippleReverse } from '../../../util/ripple/index'
@@ -52,8 +52,7 @@ export default class VsButton extends VsComponent {
 
   @Prop({ type: Boolean, default: false }) public blank!: boolean
 
-  public render(h: any): VNode {
-
+  public render(): VNode {
     const defaultSlot = h('div', {
       staticClass: 'vs-button__content'
     }, this.$slots.default )

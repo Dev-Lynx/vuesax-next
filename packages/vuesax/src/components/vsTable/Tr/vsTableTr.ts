@@ -1,5 +1,4 @@
-import Vue, { CreateElement } from 'vue'
-import { VNode } from 'vue'
+import { VNode, h, createVNode, render } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import expand from './vsTableExpand'
@@ -30,25 +29,39 @@ export default class VsTableTr extends VsComponent {
     }
   }
 
-  handleClickHasExpand(h: CreateElement) {
+  handleClickHasExpand() {
     if (this.instanceExpand) {
       this.instanceExpand.$data.hidden = !this.instanceExpand.$data.hidden
       this.instanceExpand = null
       // this.expand = false
     } else {
       const colspan = this.$parent.$el.querySelectorAll('thead th').length
-      const trExpand = Vue.extend(expand)
-      this.instanceExpand = new trExpand()
-      this.instanceExpand.$props.colspan = colspan
+      
+      //const trExpand = Vue.extends(expand)
+      // const trExpand = createVNode(expand, { colspan });
+      // this.instanceExpand = new trExpand()
+      // this.instanceExpand.$props.colspan = colspan
+
+
+      // Reference: https://www.reddit.com/r/vuejs/comments/iwc7o4/vue3_what_happen_to_vueextend/
+      // https://github.com/pearofducks/mount-vue-component/blob/master/index.js
+
+      // TODO: I'm pretty sure VsTableTr don't work properly. fix it.
+      const instance = createVNode(expand, { colspan });
+      instance.appContext = this.$.appContext;
+
+      this.instanceExpand = instance;
       this.instanceExpand.$slots.default = this.$slots.expand
-      this.instanceExpand.vm = this.instanceExpand.$mount()
-      this.instanceExpand.$data.hidden = false
-      this.insertAfter(this.instanceExpand.vm.$el)
+      // this.instanceExpand.vm = this.instanceExpand.$mount()
+      this.instanceExpand.$data.hidden = false;
+      
+      // this.insertAfter(this.instanceExpand.vm.$el);
+      this.insertAfter(instance.el);
       // this.expand = true
     }
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     return h('tr', {
       staticClass: 'vs-table__tr',
       on: {
@@ -57,7 +70,7 @@ export default class VsTableTr extends VsComponent {
             if (
               (this.openExpandOnlyTd ? evt.target.nodeName == 'TD' : true) &&
               !evt.target.className.includes('isEdit')) {
-              this.handleClickHasExpand(h)
+              this.handleClickHasExpand()
             }
           }
 

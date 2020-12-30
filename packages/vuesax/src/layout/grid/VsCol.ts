@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import { VNode } from 'vue'
+import { Options, Vue } from "vue-class-component";
+import { VNode, h } from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 
 @Component
@@ -25,7 +25,7 @@ export default class VsCol extends Vue {
 
   @Prop({ type: String, default: 'flex-start' }) public justify!: string
 
-  public render(h: any): VNode {
+  public render(): VNode {
 
     const vsCol = h('div', {
       staticClass: 'vs-col',
@@ -41,7 +41,7 @@ export default class VsCol extends Vue {
         `vs-col--sm-${this.sm}`,
         `vs-col--xs-${this.xs}`,
       ]
-    }, this.$slots.default )
+    }, this.$slots.default() )
 
     return vsCol
   }

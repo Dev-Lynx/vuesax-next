@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsIconsArrow from '../../../icons/arrow'
 import VsIconsClose from '../../../icons/close'
@@ -154,7 +154,7 @@ export default class VsSelect extends VsComponent {
 
   get getChips() {
     const chip = (item: any, isCollapse: boolean): VNode => {
-      return this.$createElement('span', {
+      return h('span', {
         staticClass: 'vs-select__chips__chip',
         attrs: {
           'data-value': item.value
@@ -166,7 +166,7 @@ export default class VsSelect extends VsComponent {
         ]
       }, [
         item.label,
-        !isCollapse && this.$createElement('span', {
+        !isCollapse && h('span', {
           staticClass: 'vs-select__chips__chip__close',
           on: {
             click: () => {
@@ -188,7 +188,7 @@ export default class VsSelect extends VsComponent {
               this.targetClose = true
             }
           },
-        }, [this.$createElement(VsIconsClose, {
+        }, [h(VsIconsClose, {
           props: {
             hover: 'less'
           }
@@ -270,7 +270,7 @@ export default class VsSelect extends VsComponent {
   get notData() {
     let childOptions: any[] = []
 
-    this.$slots.default.forEach((option: any): any => {
+    this.$slots.default().forEach((option: any): any => {
       if (option.tag) {
         if (!option.componentInstance.hiddenOption) {
           childOptions.push(option)
@@ -342,18 +342,18 @@ export default class VsSelect extends VsComponent {
   }
 
   getMessage(type: string) {
-    return this.$createElement('transition', {
+    return h('transition', {
       on: {
         beforeEnter: this.beforeEnter,
         enter: this.enter,
         leave: this.leave
       },
     }, [
-      !!this.$slots[`message-${type}`] && this.$createElement('div', {
+      !!this.$slots[`message-${type}`] && h('div', {
         staticClass: 'vs-select__message',
         class: [`vs-select__message--${type}`]
       }, [
-        this.$slots[`message-${type}`]
+        this.$slots[`message-${type}`]()
       ])
     ])
   }
@@ -427,7 +427,7 @@ export default class VsSelect extends VsComponent {
     window.removeEventListener('scroll', this.handleScroll)
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
 
     const options = h('transition', {
       props: {
@@ -467,9 +467,9 @@ export default class VsSelect extends VsComponent {
           this.notData && h('div', {
             staticClass: 'vs-select__options__content__not-data'
           }, [
-            this.$slots.notData || 'No data available'
+            this.$slots.notData ? this.$slots.notData() : 'No data available'
           ]),
-          this.$slots.default
+          this.$slots.default()
         ])
       ])
     ])
@@ -491,7 +491,9 @@ export default class VsSelect extends VsComponent {
         }
       ],
       on: {
-        ...this.$listeners,
+        // https://v3.vuejs.org/guide/migration/listeners-removed.html#overview
+        // TODO: Filter out listeners
+        ...this.$attrs,
         keydown: this.handleKeydown,
         focus: (evt: Event) => {
           this.activeOptions = true

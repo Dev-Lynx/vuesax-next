@@ -1,15 +1,18 @@
-import Vue, { VNode } from 'vue'
+import { Vue } from "vue-class-component";
+import { VNode, h } from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import './icons.sass'
 @Component
 export default class VsIconClose extends Vue {
   @Prop({ type: Boolean, default: false }) indeterminate: boolean
 
-  render(h: any): VNode {
+  render(): VNode {
     const icon = h('i', {
       staticClass: 'vs-icon-check',
       on: {
-        ...this.$listeners
+        // https://v3.vuejs.org/guide/migration/listeners-removed.html#overview
+        // TODO: Filter out listeners
+        ...this.$attrs
       },
       class: [
         {

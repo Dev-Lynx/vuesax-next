@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -143,26 +143,26 @@ export default class VsNavbar extends VsComponent {
     window.addEventListener('resize', this.handleResize)
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const left = h('div', {
       staticClass: 'vs-navbar__left',
       ref: 'left'
     }, [
-      this.$slots.left
+      this.$slots.left()
     ])
 
     const center = h('div', {
       staticClass: 'vs-navbar__center',
       ref: 'center'
     }, [
-      this.$slots.default
+      this.$slots.default()
     ])
 
     const right = h('div', {
       staticClass: 'vs-navbar__right',
       ref: 'right'
     }, [
-      this.$slots.right
+      this.$slots.right()
     ])
 
     const line = h('div', {

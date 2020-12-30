@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsIconsCheck from '../../../icons/check'
 import VsComponent from '../../../mixins/component'
@@ -73,7 +73,7 @@ export default class VsCheckbox extends VsComponent {
     return isChecked
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const InputCheckbox = h('input', {
       staticClass: 'vs-checkbox',
       attrs: {
@@ -85,7 +85,9 @@ export default class VsCheckbox extends VsComponent {
         checked: this.checkedForce || this.isChecked
       },
       on: {
-        ...this.$listeners,
+        // https://v3.vuejs.org/guide/migration/listeners-removed.html#overview
+        // TODO: Filter out listeners
+        ...this.$attrs,
         input: (evt: any) => {
           if (typeof this.value == 'boolean') {
 
@@ -136,7 +138,7 @@ export default class VsCheckbox extends VsComponent {
           indeterminate: this.indeterminate
         }
       }),
-      this.$slots.icon
+      this.$slots.icon()
     ])
 
     const label = h('label', {
@@ -150,7 +152,7 @@ export default class VsCheckbox extends VsComponent {
         for: this._uid
       }
     }, [
-      this.$slots.default
+      this.$slots.default()
     ])
 
     const conCheckbox = h('div', {

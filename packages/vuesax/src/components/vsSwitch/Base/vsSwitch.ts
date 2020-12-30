@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -51,22 +51,22 @@ export default class VsSwitch extends VsComponent {
     return isChecked
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const circle = h('div', {
       class: ['vs-switch__circle'],
     }, [
-      this.$slots.circle
+      this.$slots.circle()
     ])
 
     const textOn = h('div', {
       ref: 'on',
       class: ['vs-switch__text', 'on'],
-    }, [ this.$slots.on || this.$slots.default ])
+    }, [ this.$slots.on() || this.$slots.default() ])
 
     const textOff = h('div', {
       ref: 'off',
       class: ['vs-switch__text', 'off'],
-    }, [ this.$slots.off || this.$slots.default ])
+    }, [ this.$slots.off() || this.$slots.default()])
 
     const background = h('div', {
       class: ['vs-switch__background'],
@@ -81,7 +81,9 @@ export default class VsSwitch extends VsComponent {
         checked: this.isChecked
       },
       on: {
-        ...this.$listeners,
+        // https://v3.vuejs.org/guide/migration/listeners-removed.html#overview
+        // TODO: Filter out listeners
+        ...this.$attrs,
         input: (evt: any) => {
           if (typeof this.value == 'boolean') {
 

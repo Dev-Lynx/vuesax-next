@@ -1,11 +1,11 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component } from 'vue-property-decorator'
 import VsIconsArrow from '../../../icons/arrow'
 import VsComponent from '../../../mixins/component'
 
 @Component
 export default class VsCardGroup extends VsComponent {
-  public render(h: any): VNode {
+  public render(): VNode {
     const arrowPrev = h('button', {
       staticClass: 'vs-card__group-prev',
       on: {
@@ -42,7 +42,7 @@ export default class VsCardGroup extends VsComponent {
       staticClass: 'vs-card__group-cards',
       ref: 'cards'
     }, [
-      this.$slots.default,
+      this.$slots.default(),
       space
     ])
 

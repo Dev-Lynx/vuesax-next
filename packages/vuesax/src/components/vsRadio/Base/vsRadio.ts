@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
@@ -28,7 +28,7 @@ export default class VsRadio extends VsComponent {
     return this.value == this.val
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const radioInput = h('input', {
       attrs: {
         type: 'radio',
@@ -50,7 +50,7 @@ export default class VsRadio extends VsComponent {
       h('span', {
         staticClass: 'vs-radio__effect__icon'
       }, [
-        this.$slots.icon
+        this.$slots.icon()
       ]),
       h('span', { staticClass: 'vs-radio__effect__loading' })
     ])
@@ -60,7 +60,7 @@ export default class VsRadio extends VsComponent {
       attrs: {
         for: this._uid
       }
-    }, [ this.$slots.default ])
+    }, [ this.$slots.default() ])
 
     const radio = h('div', {
       staticClass: 'vs-radio'

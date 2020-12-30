@@ -1,5 +1,6 @@
-import Vue, { VNode } from 'vue'
-import { Component, Watch } from 'vue-property-decorator'
+import { h, VNode } from "vue";
+import { Vue } from "vue-class-component";
+import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsIconsClose from '../../../icons/close'
 import { setColor } from '../../../util/index'
 
@@ -7,57 +8,98 @@ import { setColor } from '../../../util/index'
 export default class VsNotification extends Vue {
 
   isVisible: boolean = false
-
   content: any = null
 
+  @Prop({ type: String })
   title: string = null
 
+  @Prop({ type: String })
   text: string = null
 
+  @Prop({ type: String })
   color: string | null = null
 
+  @Prop({ type: String })
   colorName: string | null = null
 
+  @Prop({ type: String })
   border: string | null = null
 
+  @Prop({ type: String })
   icon: string | null = null
   
+  @Prop({ type: Function })
   onClickClose: any = null
 
+  @Prop({ type: Function })
   onClick: any = null
 
+  @Prop({ type: Boolean, default: true })
   buttonClose: boolean = true
 
+  @Prop({ type: Boolean, default: true })
   flat: boolean = true
 
+  @Prop({ type: Function })
   onDestroy: any = null
 
+  @Prop({ type: Boolean, default: false })
   sticky: boolean = false
 
+  @Prop({ type: Boolean, default: false })
   square: boolean = false
 
+  @Prop({ type: String })
   width: string = null
 
+  @Prop({ type: Boolean, default: false })
   loading: boolean = false
 
+  @Prop({ type: Boolean, default: false })
   progressAuto: boolean = false
 
+  @Prop({ type: Number, default: 0 })
   progress: number = 0
 
+  @Prop({ type: Number, default: 4000 })
   duration: number = 4000
 
+  @Prop({ type: Number, default: 0 })
   countProgress: number = 0
 
   intervalProgress: any = null
 
+  @Prop()
   notPadding: any = null
 
+  @Prop({ type: Boolean, default: false })
   clickClose: boolean = false
 
+  @Prop({ type: String })
   classNotification: string = null
 
-  close() {
+  @Prop({ type: Function, default: () => {} }) $destroy: () => void;
+
+  public close() {
     this.isVisible = false
+  }
+
+  public setLoading(val: boolean) {
+    this.loading = val;
+  }
+
+  public changeProgress(val: number) {
+    if (val) {
+      this.progress = val;
+    }
+  }
+
+  public toggleClass(val: string) {
+    if (val) {
+      this.classNotification = val;
+      // TODO: Ensure el has a "closest" function
+      this.$el.closest('.vs-notification-parent').classList.toggle(val);
+    }
   }
 
   handleClickClose() {
@@ -122,7 +164,7 @@ export default class VsNotification extends Vue {
     clearInterval(this.intervalProgress)
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const title = h('header', {
       staticClass: 'vs-notification__content__header'
     }, [

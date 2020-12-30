@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import { Component, Prop, Watch } from 'vue-property-decorator'
+import { Vue } from "vue-class-component";
+import { Prop } from "vue-property-decorator";
 import { getColor } from '../util/index'
-@Component
+
 export default class VsComponent extends Vue {
   static install: (vue: any) => void
 

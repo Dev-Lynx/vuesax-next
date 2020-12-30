@@ -1,11 +1,12 @@
-import Vue, { VNode } from 'vue'
+import { VNode, h } from 'vue'
+import { Vue } from 'vue-class-component'
 import { Component, Prop } from 'vue-property-decorator'
 import './icons.sass'
 @Component
 export default class VsIconClose extends Vue {
   @Prop({ type: Boolean, default: false }) public less!: boolean
 
-  render(h: any): VNode {
+  render(): VNode {
     const icon = h('i', {
       staticClass: 'vs-icon-plus',
       class: {
@@ -13,7 +14,9 @@ export default class VsIconClose extends Vue {
       },
       ref: 'icon',
       on: {
-        ...this.$listeners
+        // https://v3.vuejs.org/guide/migration/listeners-removed.html#overview
+        // TODO: Filter out listeners
+        ...this.$attrs
       }
     })
 

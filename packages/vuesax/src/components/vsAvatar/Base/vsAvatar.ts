@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode, h } from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import { setColor } from '../../../util/index'
@@ -38,8 +38,9 @@ export default class VsAvatar extends VsComponent {
   }
 
   get getText() {
-    const [nodeText] = this.$slots.text
-    const text = nodeText.text.trim()
+    // TODO: Ensure getText works properly
+    const [nodeText] = this.$slots.text() as any;
+    const text = nodeText.text.trim() as string;
     let getLetters = [text]
     if (text.length > 5) {
       getLetters = text.split(/\s/g).map((item) => {
@@ -81,7 +82,7 @@ export default class VsAvatar extends VsComponent {
     }
   }
 
-  public render(h: any): VNode {
+  public render(): VNode {
     const writing = h('div', {
       staticClass: 'vs-avatar__points'
     }, [
@@ -103,7 +104,7 @@ export default class VsAvatar extends VsComponent {
         writing: this.writing
       }, this.badgePosition]
     }, [
-      this.writing ? writing : this.$slots.badge
+      this.writing ? this.$slots.writing() : this.$slots.badge()
     ])
 
     const avatar = h('div', {
@@ -112,8 +113,8 @@ export default class VsAvatar extends VsComponent {
           [`vs-avatar--letter--${this.textLength}`]: this.textLength > 2
       }
     }, [
-      this.$slots.text && this.getText,
-      this.$slots.default
+      this.$slots.text() && this.getText,
+      this.$slots.default()
     ])
 
     const loading = h('div', {
@@ -139,7 +140,7 @@ export default class VsAvatar extends VsComponent {
     const icons = h('div', {
       staticClass: 'vs-avatar__icons',
     }, [
-      this.$slots.icons
+      this.$slots.icons()
     ])
 
     return h('div', {
@@ -148,7 +149,9 @@ export default class VsAvatar extends VsComponent {
         ...this.$attrs
       },
       on: {
-        ...this.$listeners
+        // https://v3.vuejs.org/guide/migration/listeners-removed.html#overview
+        // TODO: Filter out listeners
+        ...this.$attrs
       },
       style: {
         width: `${this.size}px`,
