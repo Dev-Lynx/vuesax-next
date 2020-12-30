@@ -1,12 +1,13 @@
+import { App } from "vue"
 import './style.sass'
 import component from './VsInput'
 
-component.install = (vue: any) => {
-  vue.component('vs-input', component)
+component.install = (app: App) => {
+  app.component('vs-input', component)
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-  component.install(window.Vue)
-}
+// if (typeof window !== 'undefined' && window.Vue) {
+//   component.install(window.Vue)
+// }
 
 export default component

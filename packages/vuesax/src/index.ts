@@ -9,17 +9,18 @@ import { defineVuesaxOptions, VuesaxOptions } from './util/defineVuesaxOptions'
 const install = (app: App, options?: VuesaxOptions) => {
   // Components
   Object.values(vsComponents).forEach((vsComponent) => {
-    const chunks = vsComponent.toString().split(".");
-    const name = chunks[chunks.length-1];
+    app.use(vsComponent);
+
+    // const chunks = vsComponent.toString().split(".");
+    // const name = chunks[chunks.length-1];
     
-    app.component(_.kebabCase(name), vsComponent);
+    // app.component(_.kebabCase(name), vsComponent);
   })
   // layout
   Object.values(vsLayouts).forEach((vsLayout) => {
-    const chunks = vsLayout.toString().split(".");
-    const name = chunks[chunks.length-1];
-
-    app.component(_.kebabCase(name), vsLayout);
+    Object.values(vsLayouts).forEach((vsLayout) => {
+      app.use(vsLayout);
+    });
   })
 
   if (options) {
