@@ -5,9 +5,9 @@ import VsComponent from '../../../mixins/component'
 export default class VsInput extends VsComponent {
   isVisiblePassword: boolean = false
 
-  @Prop({ default: '' }) value!: any
-  @Prop({ default: '' }) labelPlaceholder!: any
-  @Prop({ default: '' }) label!: any
+  @Prop({ default: '' }) value!: string;
+  @Prop({ default: '' }) labelPlaceholder!: string;
+  @Prop({ default: '' }) label!: any;
   @Prop({ type: Boolean, default: false }) block!: boolean
   @Prop({ type: Boolean, default: false }) iconAfter!: boolean
   @Prop({ type: Boolean, default: false }) visiblePassword!: boolean
@@ -55,11 +55,11 @@ export default class VsInput extends VsComponent {
         leave: this.leave
       },
     }, [
-      !!this.$slots[`message-${type}`] && h('div', {
+      !!this.$slots[`message-${type}`]?.() && h('div', {
         staticClass: 'vs-input__message',
         class: [`vs-input__message--${type}`]
       }, [
-        this.$slots[`message-${type}`]()
+        this.$slots[`message-${type}`]?.()
       ])
     ])
   }
@@ -130,7 +130,7 @@ export default class VsInput extends VsComponent {
         }
       },
     }, [
-      this.$slots.icon()
+      this.$slots.icon?.()
     ])
 
     const messageSuccess = this.getMessage('success')

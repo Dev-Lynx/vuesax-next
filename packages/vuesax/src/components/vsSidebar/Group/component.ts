@@ -7,7 +7,7 @@ export default class VsSidebarGroup extends VsComponent {
   group: boolean = true
   openState: boolean = false
 
-  @Prop({type: Boolean}) open: boolean
+  @Prop({type: Boolean}) open: boolean = false;
 
   @Watch('open')
   handleOpen(val: boolean) {
@@ -63,7 +63,7 @@ export default class VsSidebarGroup extends VsComponent {
         }
       }
     }, [
-      this.$slots.header()
+      this.$slots.header?.()
     ])
 
     const content = h('div', {
@@ -76,7 +76,7 @@ export default class VsSidebarGroup extends VsComponent {
         }
       ]
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     const transition = h('transition', {

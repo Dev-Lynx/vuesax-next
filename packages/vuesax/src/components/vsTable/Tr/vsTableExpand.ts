@@ -1,14 +1,13 @@
 import { VNode, h } from 'vue'
-import { Vue } from "vue-class-component"
 import { Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
 export default class VsTableTr extends VsComponent {
-  @Prop({}) colspan: number
+  @Prop({}) colspan: number = 0;
   hidden: boolean = true
 
   @Prop({ type: Function, default: () => {} }) 
-  $destroy: () => void;
+  $destroy!: () => void;
 
   @Watch('hidden')
   handleChangeHidden(val: boolean) {
@@ -29,7 +28,7 @@ export default class VsTableTr extends VsComponent {
     const subContent = h('div', {
       staticClass: 'vs-table__expand__td__content__sub',
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     const content = h('div', {

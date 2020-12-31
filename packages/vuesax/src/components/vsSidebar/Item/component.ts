@@ -5,13 +5,13 @@ import VsIconsArrow from '../../../icons/arrow'
 
 export default class VsSidebarItem extends VsComponent {
 
-  @Prop({}) to: string
-  @Prop({}) href: string
-  @Prop({ default: '_blank' }) target: string
+  @Prop({}) to: string = "";
+  @Prop({}) href: string = "";
+  @Prop({ default: '_blank' }) target: string = "";
 
-  @Prop({ type: String }) value: string
-  @Prop({ type: String }) id: string
-  @Prop({ type: Boolean }) arrow: boolean
+  @Prop({ type: String }) value: string = "";
+  @Prop({ type: String }) id: string = "";
+  @Prop({ type: Boolean }) arrow: boolean = false;
 
   @Watch('$parent.reduce')
   handleReduce(val: boolean) {
@@ -32,19 +32,19 @@ export default class VsSidebarItem extends VsComponent {
     const icon = h('div', {
       staticClass: 'vs-sidebar__item__icon'
     }, [
-      this.$slots.icon()
+      this.$slots.icon?.()
     ])
 
     const textTooltip = h('div', {
       staticClass: 'vs-sidebar__item__text-tooltip'
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     const text = h('div', {
       staticClass: 'vs-sidebar__item__text'
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     const iconArrow = h(VsIconsArrow)
@@ -52,7 +52,7 @@ export default class VsSidebarItem extends VsComponent {
     const arrow = h('div', {
       staticClass: 'vs-sidebar__item__arrow'
     }, [
-      this.$slots.arrow ? this.$slots.arrow() : iconArrow
+      this.$slots.arrow ? this.$slots.arrow?.() : iconArrow
     ])
 
     return h('button', {
@@ -70,10 +70,10 @@ export default class VsSidebarItem extends VsComponent {
         }
       }
     }, [
-      this.$slots.icon() && icon,
+      this.$slots.icon?.() && icon,
       text,
       textTooltip,
-      this.$slots.arrow() || this.arrow && arrow
+      this.$slots.arrow?.() || this.arrow && arrow
     ])
   }
 }

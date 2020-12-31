@@ -3,11 +3,9 @@ import { Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
 export default class VsOptionGroup extends VsComponent {
-  optionGroup: boolean = true
-
-  textFilter: string = null
-
-  hiddenOptionGroup: boolean = false
+  optionGroup: boolean = true;
+  textFilter: string = "";
+  hiddenOptionGroup: boolean = false;
 
   clickOption(value: any, label: any) {
     (this.$parent as any).clickOption(value, label)
@@ -15,7 +13,7 @@ export default class VsOptionGroup extends VsComponent {
   get labels() {
     let labels: string = ''
     // TODO: Look into OptionGroup labeling once clicked
-    this.$slots.default().forEach((item: any) => {
+    this.$slots.default?.().forEach((item: any) => {
       if (item.tag) {
         labels += (item.componentInstance as any).label
       }
@@ -47,8 +45,8 @@ export default class VsOptionGroup extends VsComponent {
       ]
     },
       [
-        h('h5', {}, this.$slots.title()),
-        this.$slots.default()
+        h('h5', {}, this.$slots.title?.()),
+        this.$slots.default?.()
       ]
     )
   }

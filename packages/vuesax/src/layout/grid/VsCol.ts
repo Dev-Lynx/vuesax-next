@@ -41,7 +41,7 @@ export default class VsCol extends Vue {
         `vs-col--sm-${this.sm}`,
         `vs-col--xs-${this.xs}`,
       ]
-    }, this.$slots.default() )
+    }, this.$slots.default?.())
 
     return vsCol
   }

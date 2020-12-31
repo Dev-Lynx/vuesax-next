@@ -6,9 +6,9 @@ import expand from './vsTableExpand'
 
 export default class VsTableTr extends VsComponent {
   @Prop({}) data: any
-  @Prop({ type: Boolean, default: false }) isSelected: boolean
-  @Prop({ type: Boolean, default: false }) notClickSelected: boolean
-  @Prop({ type: Boolean, default: false }) openExpandOnlyTd: boolean
+  @Prop({ type: Boolean, default: false }) isSelected!: boolean
+  @Prop({ type: Boolean, default: false }) notClickSelected!: boolean
+  @Prop({ type: Boolean, default: false }) openExpandOnlyTd!: boolean
   expand: boolean = false
   instanceExpand: any = null
 
@@ -36,7 +36,7 @@ export default class VsTableTr extends VsComponent {
       this.instanceExpand = null
       // this.expand = false
     } else {
-      const colspan = this.$parent.$el.querySelectorAll('thead th').length
+      const colspan = this.$parent?.$el.querySelectorAll('thead th').length
       
       //const trExpand = Vue.extends(expand)
       // const trExpand = createVNode(expand, { colspan });

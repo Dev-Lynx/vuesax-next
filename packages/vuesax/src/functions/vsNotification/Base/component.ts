@@ -11,10 +11,10 @@ export default class VsNotification extends Vue {
   content: any = null
 
   @Prop({ type: String })
-  title: string = null
+  title = "";
 
   @Prop({ type: String })
-  text: string = null
+  text = "";
 
   @Prop({ type: String })
   color: string | null = null
@@ -50,7 +50,7 @@ export default class VsNotification extends Vue {
   square: boolean = false
 
   @Prop({ type: String })
-  width: string = null
+  width: string|null = null;
 
   @Prop({ type: Boolean, default: false })
   loading: boolean = false
@@ -76,9 +76,9 @@ export default class VsNotification extends Vue {
   clickClose: boolean = false
 
   @Prop({ type: String })
-  classNotification: string = null
+  classNotification: string|null = null
 
-  @Prop({ type: Function, default: () => {} }) $destroy: () => void;
+  @Prop({ type: Function, default: () => {} }) $destroy!: () => void;
 
   public close() {
     this.isVisible = false
@@ -140,8 +140,12 @@ export default class VsNotification extends Vue {
   @Watch('isVisible')
   handleIsVisible() {
     this.$nextTick(() => {
-      setColor('color', this.color, this.$el)
-      setColor('border', this.border, this.$el)
+      if (this.color) {
+        setColor('color', this.color, this.$el)
+      }
+      if (this.border) {
+        setColor('border', this.border, this.$el)
+      }
     })
   }
 

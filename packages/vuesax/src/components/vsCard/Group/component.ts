@@ -40,7 +40,7 @@ export default class VsCardGroup extends VsComponent {
       staticClass: 'vs-card__group-cards',
       ref: 'cards'
     }, [
-      this.$slots.default(),
+      this.$slots.default?.(),
       space
     ])
 

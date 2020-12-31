@@ -5,7 +5,7 @@ import './icons.sass'
 
 
 export default class VsIconClose extends Vue {
-  @Prop({ type: Boolean, default: false }) indeterminate: boolean
+  @Prop({ type: Boolean, default: false }) indeterminate!: boolean
 
   render(): VNode {
     const icon = h('i', {

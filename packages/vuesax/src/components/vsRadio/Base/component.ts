@@ -6,7 +6,7 @@ export default class VsRadio extends VsComponent {
 
   _uid: any
 
-  model: {
+  model = {
     prop: 'model',
     event: 'change'
   }
@@ -15,13 +15,13 @@ export default class VsRadio extends VsComponent {
 
   @Prop({}) val: any
 
-  @Prop({ type: String, default: null }) name: string
+  @Prop({ type: String, default: null }) name!: string;
 
-  @Prop({ type: Boolean, default: false }) disabled: boolean
+  @Prop({ type: Boolean, default: false }) disabled!: boolean;
 
-  @Prop({ type: Boolean, default: false }) loading: boolean
+  @Prop({ type: Boolean, default: false }) loading!: boolean;
 
-  @Prop({ type: Boolean, default: false }) labelBefore: boolean
+  @Prop({ type: Boolean, default: false }) labelBefore!: boolean;
 
   get isChecked() {
     return this.value == this.val
@@ -49,7 +49,7 @@ export default class VsRadio extends VsComponent {
       h('span', {
         staticClass: 'vs-radio__effect__icon'
       }, [
-        this.$slots.icon()
+        this.$slots.icon?.()
       ]),
       h('span', { staticClass: 'vs-radio__effect__loading' })
     ])
@@ -59,7 +59,7 @@ export default class VsRadio extends VsComponent {
       attrs: {
         for: this._uid
       }
-    }, [ this.$slots.default() ])
+    }, [ this.$slots.default?.() ])
 
     const radio = h('div', {
       staticClass: 'vs-radio'

@@ -7,7 +7,7 @@ import vsCheckbox from '../../vsCheckbox/Base/component'
 export default class VsSelectOption extends VsComponent {
   @Prop({}) value!: any
 
-  @Prop({type: Boolean, default: false}) disabled: boolean
+  @Prop({type: Boolean, default: false}) disabled!: boolean;
 
   // @Inject()
   // select: any
@@ -20,7 +20,7 @@ export default class VsSelectOption extends VsComponent {
 
   _uid: any
 
-  myIndex: 0
+  myIndex = 0;
 
   @Watch('$parent.textFilter')
   handleTextFilter(val: string) {
@@ -50,7 +50,7 @@ export default class VsSelectOption extends VsComponent {
 
   getParent() {
     return (this.$parent as any).isSelect && (this.$parent as any)
-    || (this.$parent.$parent as any).isSelect && (this.$parent.$parent as any)
+    || (this.$parent?.$parent as any).isSelect && (this.$parent?.$parent as any)
   }
 
   mounted() {
@@ -68,7 +68,7 @@ export default class VsSelectOption extends VsComponent {
       props: {
         checkedForce: this.isActive,
       },
-    }, [this.$slots.default()])
+    }, [this.$slots.default?.()])
 
     return h('button', {
       attrs: {
@@ -97,7 +97,7 @@ export default class VsSelectOption extends VsComponent {
       }
     }, [
       this.isMultiple && checkbox,
-      !this.isMultiple && this.$slots.default(),
+      !this.isMultiple && this.$slots.default?.(),
     ])
   }
 }

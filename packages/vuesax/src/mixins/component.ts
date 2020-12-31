@@ -8,8 +8,8 @@ export default class VsComponent extends Vue {
 
   static use: (vue: any) => any
 
-  componentColor: string = null
-  getColor: any = null
+  componentColor = "";
+  getColor: any = null;
 
   @Prop({ type: String, default: null }) color!: string
 

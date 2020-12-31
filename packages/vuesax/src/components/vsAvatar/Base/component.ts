@@ -4,33 +4,33 @@ import VsComponent from '../../../mixins/component'
 import { setColor } from '../../../util/index'
 
 export default class VsAvatar extends VsComponent {
-  @Prop({ default: null }) badgePosition: string
+  @Prop({ default: null }) badgePosition!: string;
 
-  @Prop({ default: false, type: Boolean }) pointer: boolean
+  @Prop({ default: false, type: Boolean }) pointer!: boolean;
 
-  @Prop({ default: false, type: Boolean }) circle: boolean
+  @Prop({ default: false, type: Boolean }) circle!: boolean;
 
-  @Prop({ default: false, type: Boolean }) square: boolean
+  @Prop({ default: false, type: Boolean }) square!: boolean;
 
-  @Prop({ default: false, type: Boolean }) history: boolean
+  @Prop({ default: false, type: Boolean }) history!: boolean;
 
-  @Prop({ default: false, type: Boolean }) loading: boolean
+  @Prop({ default: false, type: Boolean }) loading!: boolean;
 
-  @Prop({ default: false, type: Boolean }) historyGradient: boolean
+  @Prop({ default: false, type: Boolean }) historyGradient!: boolean;
 
-  @Prop({ default: false, type: Boolean }) writing: boolean
+  @Prop({ default: false, type: Boolean }) writing!: boolean;
 
-  @Prop({ default: false, type: Boolean }) badge: boolean
+  @Prop({ default: false, type: Boolean }) badge!: boolean;
 
-  @Prop({ default: '', type: String }) badgeColor: string
+  @Prop({ default: '', type: String }) badgeColor!: string;
 
-  @Prop({ default: '', type: String }) size: string
+  @Prop({ default: '', type: String }) size!: string;
 
   textLength: number = 0
 
   countPlus: number = 0
 
-  index: number = null
+  index: number = 0;
 
   getParent() {
     return (this.$parent as any).vsAvatarGroup && (this.$parent as any)
@@ -38,7 +38,7 @@ export default class VsAvatar extends VsComponent {
 
   get getText() {
     // TODO: Ensure getText works properly
-    const [nodeText] = this.$slots.text() as any;
+    const [nodeText] = this.$slots.text?.() as any;
     const text = nodeText.text.trim() as string;
     let getLetters = [text]
     if (text.length > 5) {
@@ -103,7 +103,7 @@ export default class VsAvatar extends VsComponent {
         writing: this.writing
       }, this.badgePosition]
     }, [
-      this.writing ? this.$slots.writing() : this.$slots.badge()
+      this.writing ? this.$slots.writing?.() : this.$slots.badge?.()
     ])
 
     const avatar = h('div', {
@@ -112,8 +112,8 @@ export default class VsAvatar extends VsComponent {
           [`vs-avatar--letter--${this.textLength}`]: this.textLength > 2
       }
     }, [
-      this.$slots.text() && this.getText,
-      this.$slots.default()
+      this.$slots.text?.() && this.getText,
+      this.$slots.default?.()
     ])
 
     const loading = h('div', {
@@ -139,7 +139,7 @@ export default class VsAvatar extends VsComponent {
     const icons = h('div', {
       staticClass: 'vs-avatar__icons',
     }, [
-      this.$slots.icons()
+      this.$slots.icons?.()
     ])
 
     return h('div', {

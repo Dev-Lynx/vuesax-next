@@ -24,7 +24,7 @@ export default class VsLoading extends Vue {
 
   isVisible: boolean = false
 
-  @Prop({ type: Function, default: () => {} }) $destroy: () => void;
+  @Prop({ type: Function, default: () => {} }) $destroy!: () => void;
 
   public close() {
     this.isVisible = false
@@ -56,8 +56,15 @@ export default class VsLoading extends Vue {
   @Watch('isVisible')
   handleIsVisible() {
     this.$nextTick(() => {
-      setColor('color', this.color, this.$el)
-      setColor('background', this.background, this.$el)
+      if (this.color) {
+        // TODO: Specify a default color>
+        setColor('color', this.color, this.$el)
+      }
+      
+      if (this.background) {
+        setColor('background', this.background, this.$el)
+      }
+      
       if(this.opacity) {
         setVar('opacity', this.opacity, this.$el)
       }
@@ -84,9 +91,11 @@ export default class VsLoading extends Vue {
       })
     ])
 
+    // TODO: Figure out how to create a text element with h
+    
     const text = h('div', {
       class: ['vs-loading__load__text'],
-    }, this.text)
+    }, this.text ?? "");
 
     const loading = h('div', {
       class: ['vs-loading__load'],

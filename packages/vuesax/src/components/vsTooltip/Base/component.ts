@@ -11,29 +11,29 @@ export default class VsTooltip extends VsComponent {
 
   @Prop({}) value: any
 
-  @Prop({ default: false, type: Boolean }) loading: boolean
+  @Prop({ default: false, type: Boolean }) loading!: boolean
 
-  @Prop({ default: false, type: Boolean }) bottom: boolean
+  @Prop({ default: false, type: Boolean }) bottom!: boolean
 
-  @Prop({ default: false, type: Boolean }) left: boolean
+  @Prop({ default: false, type: Boolean }) left!: boolean
 
-  @Prop({ default: false, type: Boolean }) right: boolean
+  @Prop({ default: false, type: Boolean }) right!: boolean
 
-  @Prop({ default: false, type: Boolean }) notHover: boolean
+  @Prop({ default: false, type: Boolean }) notHover!: boolean
 
-  @Prop({ default: false, type: Boolean }) shadow: boolean
+  @Prop({ default: false, type: Boolean }) shadow!: boolean
 
-  @Prop({ default: false, type: Boolean }) interactivity: boolean
+  @Prop({ default: false, type: Boolean }) interactivity!: boolean
 
-  @Prop({ default: false, type: Boolean }) notArrow: boolean
+  @Prop({ default: false, type: Boolean }) notArrow!: boolean
 
-  @Prop({ default: false, type: Boolean }) square: boolean
+  @Prop({ default: false, type: Boolean }) square!: boolean
 
-  @Prop({ default: false, type: Boolean }) circle: boolean
+  @Prop({ default: false, type: Boolean }) circle!: boolean
 
-  @Prop({ default: false, type: Boolean }) border: boolean
+  @Prop({ default: false, type: Boolean }) border!: boolean
 
-  @Prop({ default: false, type: Boolean }) borderThick: boolean
+  @Prop({ default: false, type: Boolean }) borderThick!: boolean
 
   @Prop({ default: null, type: String }) delay: any
 
@@ -179,7 +179,7 @@ export default class VsTooltip extends VsComponent {
         }
       }
     }, [
-      this.$slots.tooltip(),
+      this.$slots.tooltip?.(),
       this.loading && loading
     ])
 
@@ -214,7 +214,7 @@ export default class VsTooltip extends VsComponent {
       }, [
         this.activeTooltip && tooltip,
       ]),
-      this.$slots.default()
+      this.$slots.default?.()
     ])
   }
 }

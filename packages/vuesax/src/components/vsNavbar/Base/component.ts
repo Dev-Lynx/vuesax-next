@@ -4,17 +4,17 @@ import VsComponent from '../../../mixins/component'
 
 export default class VsNavbar extends VsComponent {
 
-  @Prop({ default: false, type: Boolean }) fixed: boolean
-  @Prop({ default: false, type: Boolean }) shadow: boolean
-  @Prop({ default: false, type: Boolean }) shadowScroll: boolean
-  @Prop({ default: false, type: Boolean }) hideScroll: boolean
-  @Prop({ default: false, type: Boolean }) textWhite: boolean
-  @Prop({ default: false, type: Boolean }) square: boolean
-  @Prop({ default: false, type: Boolean }) paddingScroll: boolean
-  @Prop({ default: false, type: Boolean }) notLine: boolean
-  @Prop({ default: false, type: Boolean }) leftCollapsed: boolean
-  @Prop({ default: false, type: Boolean }) centerCollapsed: boolean
-  @Prop({ default: false, type: Boolean }) rightCollapsed: boolean
+  @Prop({ default: false, type: Boolean }) fixed!: boolean;
+  @Prop({ default: false, type: Boolean }) shadow!: boolean;
+  @Prop({ default: false, type: Boolean }) shadowScroll!: boolean;
+  @Prop({ default: false, type: Boolean }) hideScroll!: boolean;
+  @Prop({ default: false, type: Boolean }) textWhite!: boolean;
+  @Prop({ default: false, type: Boolean }) square!: boolean;
+  @Prop({ default: false, type: Boolean }) paddingScroll!: boolean;
+  @Prop({ default: false, type: Boolean }) notLine!: boolean;
+  @Prop({ default: false, type: Boolean }) leftCollapsed!: boolean;
+  @Prop({ default: false, type: Boolean }) centerCollapsed!: boolean;
+  @Prop({ default: false, type: Boolean }) rightCollapsed!: boolean;
   @Prop({ default: null }) targetScroll: any
 
   leftLine: number = 0
@@ -147,21 +147,21 @@ export default class VsNavbar extends VsComponent {
       staticClass: 'vs-navbar__left',
       ref: 'left'
     }, [
-      this.$slots.left()
+      this.$slots.left?.()
     ])
 
     const center = h('div', {
       staticClass: 'vs-navbar__center',
       ref: 'center'
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     const right = h('div', {
       staticClass: 'vs-navbar__right',
       ref: 'right'
     }, [
-      this.$slots.right()
+      this.$slots.right?.()
     ])
 
     const line = h('div', {

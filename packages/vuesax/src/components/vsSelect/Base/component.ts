@@ -11,19 +11,19 @@ export default class VsSelect extends VsComponent {
 
   @Prop({}) value!: any
 
-  @Prop({ type: Boolean, default: false }) multiple: boolean
+  @Prop({ type: Boolean, default: false }) multiple!: boolean;
 
-  @Prop({ type: Boolean, default: false }) filter: boolean
+  @Prop({ type: Boolean, default: false }) filter!: boolean;
 
-  @Prop({ type: String, default: '' }) placeholder: string
+  @Prop({ type: String, default: '' }) placeholder!: string;
 
-  @Prop({ type: String, default: '' }) labelPlaceholder: string
+  @Prop({ type: String, default: '' }) labelPlaceholder!: string;
 
-  @Prop({ type: String, default: '' }) label: string
+  @Prop({ type: String, default: '' }) label!: string;
 
-  @Prop({ type: Boolean, default: false }) disabled: boolean
+  @Prop({ type: Boolean, default: false }) disabled!: boolean;
 
-  @Prop({ type: Boolean, default: false }) collapseChips: boolean
+  @Prop({ type: Boolean, default: false }) collapseChips!: boolean;
 
   @Prop({ type: Boolean, default: false }) loading!: boolean
 
@@ -51,7 +51,7 @@ export default class VsSelect extends VsComponent {
 
   activeFilter: boolean = false
 
-  textFilter: string = null
+  textFilter: string = "";
 
   childVisibles: number = 0
 
@@ -269,7 +269,7 @@ export default class VsSelect extends VsComponent {
   get notData() {
     let childOptions: any[] = []
 
-    this.$slots.default().forEach((option: any): any => {
+    this.$slots.default?.().forEach((option: any): any => {
       if (option.tag) {
         if (!option.componentInstance.hiddenOption) {
           childOptions.push(option)
@@ -348,11 +348,11 @@ export default class VsSelect extends VsComponent {
         leave: this.leave
       },
     }, [
-      !!this.$slots[`message-${type}`] && h('div', {
+      !!this.$slots[`message-${type}`]?.() && h('div', {
         staticClass: 'vs-select__message',
         class: [`vs-select__message--${type}`]
       }, [
-        this.$slots[`message-${type}`]()
+        this.$slots[`message-${type}`]?.()
       ])
     ])
   }
@@ -468,7 +468,7 @@ export default class VsSelect extends VsComponent {
           }, [
             this.$slots.notData ? this.$slots.notData() : 'No data available'
           ]),
-          this.$slots.default()
+          this.$slots.default?.()
         ])
       ])
     ])

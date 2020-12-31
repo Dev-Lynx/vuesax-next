@@ -28,7 +28,7 @@ const loading = (params: LoadingParams = {}) => {
     params.target = document.body
   }
 
-  mountVue(instance, { 
+  mountVue(instance.$.vnode, { 
     props: {
       ...params
     }
@@ -46,7 +46,10 @@ const loading = (params: LoadingParams = {}) => {
   
 
   // params.target.appendChild(instance.$mount().$el)
-  document.body.style.overflowY = params.hidden && 'hidden'
+  // document.body.style.overflowY = params.hidden && 'hidden';
+  if (params.hidden) {
+    document.body.style.overflowY = "hidden";
+  }
   
   instance.$nextTick(() => {
     instance.isVisible = true;

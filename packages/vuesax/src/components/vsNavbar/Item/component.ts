@@ -3,11 +3,11 @@ import { Prop, Watch } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
 export default class VsNavbarItem extends VsComponent {
-  @Prop({ default: false, type: Boolean }) active: boolean
-  @Prop({}) to: string
-  @Prop({}) id: string
-  @Prop({}) href: string
-  @Prop({ default: '_blank' }) target: string
+  @Prop({ default: false, type: Boolean }) active!: boolean;
+  @Prop({}) to!: string;
+  @Prop({}) id!: string;
+  @Prop({}) href!: string;
+  @Prop({ default: '_blank' }) target!: string;
 
   @Watch('active')
   handleWatchActive() {
@@ -67,6 +67,6 @@ export default class VsNavbarItem extends VsComponent {
           this.handleActive()
         }
       }
-    }, this.$slots.default())
+    }, this.$slots.default?.())
   }
 }

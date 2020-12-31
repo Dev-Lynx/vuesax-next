@@ -25,7 +25,7 @@ export default class VsRow extends Vue {
         alignItems: this.align,
         flexDirection: this.direction
       },
-    }, this.$slots.default() )
+    }, this.$slots.default?.() )
 
     return vsRow
   }

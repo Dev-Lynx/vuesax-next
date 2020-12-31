@@ -4,7 +4,7 @@ import VsIconsArrow from '../../../icons/arrow'
 import VsComponent from '../../../mixins/component'
 
 export default class VsTableTh extends VsComponent {
-  @Prop({ default: false, type: Boolean }) sort: boolean
+  @Prop({ default: false, type: Boolean }) sort!: boolean
 
   mounted() {
     (this.$el as HTMLElement).style.width = `${this.$el.scrollWidth}px`
@@ -28,7 +28,7 @@ export default class VsTableTh extends VsComponent {
     const content = h('div', {
       staticClass: 'vs-table__th__content',
     }, [
-      this.$slots.default(),
+      this.$slots.default?.(),
       this.sort && icons
     ])
 

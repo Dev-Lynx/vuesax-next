@@ -73,8 +73,6 @@
     "signale": "^1.4.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
-    "tslint": "^5.20.0",
-    "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.6.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vue": "^3.0.4",

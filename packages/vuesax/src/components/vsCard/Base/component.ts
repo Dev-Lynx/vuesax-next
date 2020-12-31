@@ -4,39 +4,39 @@ import VsComponent from '../../../mixins/component'
 
 export default class VsCard extends VsComponent {
 
-  @Prop({ default: '1', type: [String, Boolean] }) type: string | number
+  @Prop({ default: '1', type: [String, Boolean] }) type!: string | number;
 
   public render(): VNode {
     const title = h('div', {
       staticClass: 'vs-card__title'
     }, [
-      this.$slots.title()
+      this.$slots.title?.()
     ])
 
     const text = h('div', {
       staticClass: 'vs-card__text'
     }, [
       this.$slots.title && title,
-      this.$slots.text()
+      this.$slots.text?.()
     ])
 
     const buttons = h('div', {
       staticClass: 'vs-card__buttons'
     }, [
-      this.$slots.buttons()
+      this.$slots.buttons?.()
     ])
 
     const interactions = h('div', {
       staticClass: 'vs-card__interactions'
     }, [
-      this.$slots.interactions()
+      this.$slots.interactions?.()
     ])
 
     const img = h('div', {
       staticClass: 'vs-card__img'
     }, [
-      this.$slots.img(),
-      this.$slots.interactions() && interactions
+      this.$slots.img?.(),
+      this.$slots.interactions?.() && interactions
     ])
 
     const card = h('div', {

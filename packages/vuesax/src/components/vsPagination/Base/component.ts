@@ -10,35 +10,35 @@ export default class VsPagination extends VsComponent {
 
   activeClassMove: boolean = false
 
-  @Prop({}) value: number
+  @Prop({}) value!: number;
 
-  @Prop({ default: false, type: Boolean }) infinite: boolean
+  @Prop({ default: false, type: Boolean }) infinite!: boolean;
 
-  @Prop({ default: false, type: Boolean }) progress: boolean
+  @Prop({ default: false, type: Boolean }) progress!: boolean;
 
-  @Prop({ default: false, type: Boolean }) notMargin: boolean
+  @Prop({ default: false, type: Boolean }) notMargin!: boolean;
 
-  @Prop({ default: false, type: Boolean }) buttonsDotted: boolean
+  @Prop({ default: false, type: Boolean }) buttonsDotted!: boolean;
 
-  @Prop({ default: false, type: Boolean }) notArrows: boolean
+  @Prop({ default: false, type: Boolean }) notArrows!: boolean;
 
-  @Prop({ default: false, type: Boolean }) onlyArrows: boolean
+  @Prop({ default: false, type: Boolean }) onlyArrows!: boolean;
 
-  @Prop({ default: false, type: Boolean }) circle: boolean
+  @Prop({ default: false, type: Boolean }) circle!: boolean;
 
-  @Prop({ default: false, type: Boolean }) square: boolean
+  @Prop({ default: false, type: Boolean }) square!: boolean;
 
-  @Prop({ default: false, type: Boolean }) disabled: boolean
+  @Prop({ default: false, type: Boolean }) disabled!: boolean;
 
-  @Prop({ default: (): any => [], type: Array }) disabledItems: number[]
+  @Prop({ default: (): any => [], type: Array }) disabledItems!: number[];
 
-  @Prop({ default: (): any => [], type: Array }) loadingItems: number[]
+  @Prop({ default: (): any => [], type: Array }) loadingItems!: number[];
 
-  @Prop({ default: 0, type: Number }) length: number
+  @Prop({ default: 0, type: Number }) length!: number;
 
-  @Prop({ default: 9, type: Number }) max: number
+  @Prop({ default: 9, type: Number }) max!: number;
 
-  @Prop({ default: 5, type: Number }) dottedNumber: number
+  @Prop({ default: 5, type: Number }) dottedNumber!: number;
 
   @Watch('length')
   handleLength() {
@@ -287,7 +287,7 @@ export default class VsPagination extends VsComponent {
     const slot = h('div', {
       staticClass: 'vs-pagination__slot',
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     const progress = h('div', {

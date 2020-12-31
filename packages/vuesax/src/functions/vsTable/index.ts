@@ -58,7 +58,7 @@ const getSearch = (data: any, search: string = ''): any => {
 
 const sortData = (evt: any, data: any, sortKey: string, type: string) => {
   data = [...data].sort(returnOriginalIndex)
-  let sortType = type || 'desc'
+  let sortType: string|null = type || 'desc';
   const el = evt.target
 
   if (el.dataset[`sortType${sortKey}`] == 'desc') {

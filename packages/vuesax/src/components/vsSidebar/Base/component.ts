@@ -6,17 +6,17 @@ import { setColor } from '../../../util/index'
 export default class VsSidebar extends VsComponent {
 
   @Prop({}) value: any
-  @Prop({ default: false, type: Boolean }) reduce: boolean
-  @Prop({ default: false, type: Boolean }) hoverExpand: boolean
-  @Prop({ default: false, type: Boolean }) open: boolean
-  @Prop({ default: false, type: Boolean }) notLineActive: boolean
-  @Prop({ default: false, type: Boolean }) square: boolean
-  @Prop({ default: false, type: Boolean }) textWhite: boolean
-  @Prop({ default: false, type: Boolean }) notShadow: boolean
-  @Prop({ default: false, type: Boolean }) relative: boolean
-  @Prop({ default: false, type: Boolean }) absolute: boolean
-  @Prop({ default: false, type: Boolean }) right: boolean
-  @Prop({ default: 'background', type: String }) background: string
+  @Prop({ default: false, type: Boolean }) reduce!: boolean;
+  @Prop({ default: false, type: Boolean }) hoverExpand!: boolean;
+  @Prop({ default: false, type: Boolean }) open!: boolean;
+  @Prop({ default: false, type: Boolean }) notLineActive!: boolean;
+  @Prop({ default: false, type: Boolean }) square!: boolean;
+  @Prop({ default: false, type: Boolean }) textWhite!: boolean;
+  @Prop({ default: false, type: Boolean }) notShadow!: boolean;
+  @Prop({ default: false, type: Boolean }) relative!: boolean;
+  @Prop({ default: false, type: Boolean }) absolute!: boolean;
+  @Prop({ default: false, type: Boolean }) right!: boolean;
+  @Prop({ default: 'background', type: String }) background!: string;
 
   staticWidth: number = 260
   forceExpand: boolean = false
@@ -89,25 +89,25 @@ export default class VsSidebar extends VsComponent {
     const logo = h('div', {
       staticClass: 'vs-sidebar__logo'
     }, [
-      this.$slots.logo()
+      this.$slots.logo?.()
     ])
 
     const header = h('div', {
       staticClass: 'vs-sidebar__header'
     }, [
-      this.$slots.header()
+      this.$slots.header?.()
     ])
 
     const footer = h('div', {
       staticClass: 'vs-sidebar__footer'
     }, [
-      this.$slots.footer()
+      this.$slots.footer?.()
     ])
 
     const sidebar = h('div', {
       staticClass: 'vs-sidebar',
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     return h('div', {
@@ -147,10 +147,10 @@ export default class VsSidebar extends VsComponent {
         }
       }
     }, [
-      this.$slots.logo() && logo,
-      this.$slots.header() && header,
+      this.$slots.logo?.() && logo,
+      this.$slots.header?.() && header,
       sidebar,
-      this.$slots.footer() && footer
+      this.$slots.footer?.() && footer
     ])
   }
 }

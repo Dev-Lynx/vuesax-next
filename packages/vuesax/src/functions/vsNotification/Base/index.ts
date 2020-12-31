@@ -88,7 +88,7 @@ const notification = (params: NotificationParams = {}) => {
   // parent.appendChild(instance.$mount().$el)
   // document.body.appendChild(parent)
 
-  mountVue(instance, {
+  mountVue(instance.$.vnode, {
     props: {
       ...params
     }, element: parent

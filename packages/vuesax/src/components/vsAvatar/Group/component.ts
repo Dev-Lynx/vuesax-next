@@ -3,9 +3,9 @@ import { Prop } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 
 export default class VsAvatarGroup extends VsComponent {
-  @Prop({ default: null }) max: number
+  @Prop({ default: null, type: Number }) max!: number|null;
 
-  @Prop({ default: false, type: Boolean }) float: boolean
+  @Prop({ default: false, type: Boolean }) float!: boolean
 
   avatars: any[] = []
 
@@ -18,7 +18,7 @@ export default class VsAvatarGroup extends VsComponent {
         float: this.float
       }
     }, {
-      [this.$slots.default.toString()]: this.$slots.default
+      [this.$slots.default?.().toString() ?? "default"]: this.$slots.default?.()
     })
   }
 }

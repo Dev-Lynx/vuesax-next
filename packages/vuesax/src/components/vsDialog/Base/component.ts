@@ -7,33 +7,33 @@ import { insertBody } from '../../../util/index'
 export default class VsDialog extends VsComponent {
   rebound: boolean = false
 
-  @Prop({ default: false, type: Boolean }) value: boolean
+  @Prop({ default: false, type: Boolean }) value!: boolean;
 
-  @Prop({ default: false, type: Boolean }) loading: boolean
+  @Prop({ default: false, type: Boolean }) loading!: boolean;
 
-  @Prop({ default: false, type: Boolean }) fullScreen: boolean
+  @Prop({ default: false, type: Boolean }) fullScreen!: boolean;
 
-  @Prop({ default: false, type: Boolean }) notClose: boolean
+  @Prop({ default: false, type: Boolean }) notClose!: boolean;
 
-  @Prop({ default: false, type: Boolean }) preventClose: boolean
+  @Prop({ default: false, type: Boolean }) preventClose!: boolean;
 
-  @Prop({ default: false, type: Boolean }) notPadding: boolean
+  @Prop({ default: false, type: Boolean }) notPadding!: boolean;
 
-  @Prop({ default: false, type: Boolean }) overflowHidden: boolean
+  @Prop({ default: false, type: Boolean }) overflowHidden!: boolean;
 
-  @Prop({ default: false, type: Boolean }) blur: boolean
+  @Prop({ default: false, type: Boolean }) blur!: boolean;
 
-  @Prop({ default: false, type: Boolean }) square: boolean
+  @Prop({ default: false, type: Boolean }) square!: boolean;
 
-  @Prop({ default: false, type: Boolean }) autoWidth: boolean
+  @Prop({ default: false, type: Boolean }) autoWidth!: boolean;
 
-  @Prop({ default: false, type: Boolean }) scroll: boolean
+  @Prop({ default: false, type: Boolean }) scroll!: boolean;
 
-  @Prop({ default: false, type: Boolean }) notCenter: boolean
+  @Prop({ default: false, type: Boolean }) notCenter!: boolean;
 
-  @Prop({ default: null, type: String }) width: string
+  @Prop({ default: null, type: String }) width!: string;
 
-  @Prop({ default: false, type: Boolean }) routerClose: boolean
+  @Prop({ default: false, type: Boolean }) routerClose!: boolean;
 
   esc(evt: any) {
     if (evt.which == 27 && !this.preventClose) {
@@ -79,7 +79,7 @@ export default class VsDialog extends VsComponent {
     const header = h('header', {
       staticClass: 'vs-dialog__header'
     }, [
-      this.$slots.header()
+      this.$slots.header?.()
     ])
 
     const content = h('div', {
@@ -88,13 +88,13 @@ export default class VsDialog extends VsComponent {
         notFooter: !this.$slots.footer
       }
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     const footer = h('footer', {
       staticClass: 'vs-dialog__footer'
     }, [
-      this.$slots.footer()
+      this.$slots.footer?.()
     ])
 
     const close = h('button', {
@@ -139,9 +139,9 @@ export default class VsDialog extends VsComponent {
     }, [
       this.loading && loading,
       !this.notClose && close,
-      this.$slots.header() && header,
+      this.$slots.header?.() && header,
       content,
-      this.$slots.footer() && footer
+      this.$slots.footer?.() && footer
     ])
 
     const dialogContent = h('div', {

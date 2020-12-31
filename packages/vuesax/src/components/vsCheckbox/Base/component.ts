@@ -7,19 +7,19 @@ export default class VsCheckbox extends VsComponent {
   // tslint:disable-next-line:variable-name
   _uid: any
 
-  @Prop({ default: '' }) value: any
+  @Prop({ default: '' }) value!: any;
 
-  @Prop({ default: '' }) val!: any
+  @Prop({ default: '' }) val!: string;
 
-  @Prop({ default: '' }) notValue!: any
+  @Prop({ default: '' }) notValue!: string;
 
-  @Prop({ type: Boolean, default: false }) indeterminate!: boolean
+  @Prop({ type: Boolean, default: false }) indeterminate!: boolean;
 
   @Prop({ type: Boolean, default: false }) lineThrough!: boolean
 
-  @Prop({ type: Boolean, default: false }) checked: boolean
+  @Prop({ type: Boolean, default: false }) checked!: boolean
 
-  @Prop({ type: Boolean, default: false }) checkedForce: boolean
+  @Prop({ type: Boolean, default: false }) checkedForce!: boolean
 
   @Prop({ type: Boolean, default: false }) loading!: boolean
 
@@ -48,7 +48,7 @@ export default class VsCheckbox extends VsComponent {
       if (typeof this.value == 'boolean') {
         isChecked = this.value
       } else if (typeof this.value == 'object' && this.value !== null) {
-        const array = this.value
+        const array = this.value;
         const containValue = array.indexOf(this.val) === -1 &&
         JSON.stringify(array).indexOf(JSON.stringify(this.val)) === -1
         let indexVal = 0
@@ -137,7 +137,7 @@ export default class VsCheckbox extends VsComponent {
           indeterminate: this.indeterminate
         }
       }),
-      this.$slots.icon()
+      this.$slots.icon?.()
     ])
 
     const label = h('label', {
@@ -151,7 +151,7 @@ export default class VsCheckbox extends VsComponent {
         for: this._uid
       }
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
 
     const conCheckbox = h('div', {

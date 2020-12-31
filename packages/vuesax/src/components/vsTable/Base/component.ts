@@ -7,7 +7,7 @@ export default class VsTable extends VsComponent {
   colspan: number = 0
   @Prop({}) value: any
   @Prop({ default: false, type: Boolean }) striped: any
-  @Prop({ default: false, type: Boolean }) loading: boolean
+  @Prop({ default: false, type: Boolean }) loading!: boolean
   // @Prop({ default: false, type: Boolean }) multiple: boolean
 
   mounted() {
@@ -42,20 +42,20 @@ export default class VsTable extends VsComponent {
     const footer = h('footer', {
       staticClass: 'vs-table__footer'
     }, [
-      this.$slots.footer()
+      this.$slots.footer?.()
     ])
 
     const header = h('header', {
       staticClass: 'vs-table__header'
     }, [
-      this.$slots.header()
+      this.$slots.header?.()
     ])
 
     const thead = h('thead', {
       ref: 'thead',
       staticClass: 'vs-table__thead'
     }, [
-      this.$slots.thead()
+      this.$slots.thead?.()
     ])
 
     const notFound = h('tbody', {
@@ -67,7 +67,7 @@ export default class VsTable extends VsComponent {
             colspan: this.colspan
           }
         }, [
-           this.$slots.notFound() || 'No matching records found'
+           this.$slots.notFound?.() || 'No matching records found'
         ])
       ])
     ])
@@ -75,7 +75,7 @@ export default class VsTable extends VsComponent {
     const tbody = h('tbody', {
       staticClass: 'vs-table__tbody'
     }, [
-      this.$slots.tbody(),
+      this.$slots.tbody?.(),
     ])
 
     const table = h('div', {

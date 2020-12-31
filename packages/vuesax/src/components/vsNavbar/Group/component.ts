@@ -20,12 +20,12 @@ export default class VsNavbarGroup extends VsComponent {
       staticClass: 'vs-navbar__group__item',
       ref: 'item'
     }, [
-      this.$slots.default()
+      this.$slots.default?.()
     ])
     const items = h('div', {
       staticClass: 'vs-navbar__group__items'
     }, [
-      this.$slots.items()
+      this.$slots.items?.()
     ])
 
     return h('div', {
