@@ -172,14 +172,14 @@ export default class VsPagination extends VsComponent {
     return buttons
   }
 
-  get isMobile() {
-    let isMobile = false
+  get isMobile(): boolean {
+    let isMobile = false;
     if (!this.$isServer) {
       if (window.innerWidth < 600) {
-        isMobile = true
+        isMobile = true;
       }
     }
-    return isMobile
+    return isMobile;
   }
 
   get getPages() {
