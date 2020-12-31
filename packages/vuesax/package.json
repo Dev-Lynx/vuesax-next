@@ -4,8 +4,8 @@
   "description": "Framework components for vuejs",
   "main": "dist/vuesax.js",
   "scripts": {
-    "build": "node build/index.js",
-    "build:components": "npx webpack --config build/components/webpack.component.js",
+    "build": "node ./build/index.js",
+    "build:components": "npx webpack --config ./build/components/webpack.component.js",
     "build:vue": "vue-cli-service build -t lib ./src/index.ts --name vuesax",
     "test": "jest",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",

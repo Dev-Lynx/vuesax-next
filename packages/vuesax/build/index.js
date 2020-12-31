@@ -13,7 +13,7 @@ emptyLine()
 emptyLine()
 
 execSync(
-  `npx webpack --config build/lib/webpack.umd.js`, {stdio: 'inherit'}
+  `npx webpack --config ./build/lib/webpack.umd.js`, {stdio: 'inherit'}
   )
 
 emptyLine()
@@ -23,7 +23,7 @@ emptyLine()
 emptyLine()
 
 execSync(
-  `npx webpack --config build/components/webpack.components.js`, {stdio: 'inherit'}
+  `npx webpack --config ./build/components/webpack.components.js`, {stdio: 'inherit'}
   )
 
 emptyLine()
@@ -33,7 +33,7 @@ emptyLine()
 emptyLine()
 
 execSync(
-  `npx webpack --config build/styles/webpack.styles.js`, {stdio: 'inherit'}
+  `npx webpack --config ./build/styles/webpack.styles.js`, {stdio: 'inherit'}
   )
 
 emptyLine()
