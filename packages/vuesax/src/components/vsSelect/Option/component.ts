@@ -2,7 +2,7 @@ import { VNode, h } from 'vue'
 import { Inject, Prop, Watch  } from 'vue-property-decorator'
 import VsComponent from '../../../mixins/component'
 import '../../vsCheckbox/Base/style.sass'
-import vsCheckbox from '../../vsCheckbox/Base/vsCheckbox'
+import vsCheckbox from '../../vsCheckbox/Base/component'
 
 export default class VsSelectOption extends VsComponent {
   @Prop({}) value!: any

@@ -18,10 +18,8 @@ const install = (app: App, options?: VuesaxOptions) => {
   })
   // layout
   Object.values(vsLayouts).forEach((vsLayout) => {
-    Object.values(vsLayouts).forEach((vsLayout) => {
-      app.use(vsLayout);
-    });
-  })
+    app.use(vsLayout);
+  });
 
   if (options) {
     defineVuesaxOptions(options)
@@ -30,9 +28,4 @@ const install = (app: App, options?: VuesaxOptions) => {
   defineVuesaxFunctions(app);
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue)
-}
-
-// export default install
 export default install

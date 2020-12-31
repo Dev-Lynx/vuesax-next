@@ -1,6 +1,7 @@
-import './style.sass'
 import mountVue from "../../../util/mountVueComponent";
-import VsNotification from './VsNotification';
+import VsNotification from './component';
+
+import './style.sass';
 
 interface NotificationParams {
   title?: string

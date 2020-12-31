@@ -1,13 +1,11 @@
 import './style.sass'
 import { App } from "vue";
-import component from './VsTableTr'
+import component from './component'
 
 component.install = (app: App) => {
   app.component('vs-tr', component)
 }
 
-// if (typeof window !== 'undefined' && window.Vue) {
-//   component.install(window.Vue)
-// }
+
 
 export default component
